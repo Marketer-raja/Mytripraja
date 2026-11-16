@@ -37,3 +37,11 @@ nav a.facebook{font-size:28px;font-weight:bold}
 nav a.linkedin{font-size:27px;font-weight:bold}
 @media(max-width:650px){nav a{transform:scale(.85)}nav a:hover{transform:scale(.85) translateY(-2px)}.brand-logo{height:44px}}
 @media(max-height:500px) and (orientation:landscape){.brand-logo{height:40px}nav a{transform:scale(.7)}}
+
+/* Brand name next to logo */
+.brand{gap:12px}
+.brand-name{font-size:clamp(18px,3.2dvh,28px);font-weight:700;letter-spacing:-.5px;color:#fff;white-space:nowrap}
+/* Move intro text slightly upward */
+.intro{transform:translateY(-2.2dvh)}
+@media(max-width:650px){.brand-name{font-size:19px}.brand{gap:8px}.intro{transform:translateY(-1.5dvh)}}
+@media(max-height:500px) and (orientation:landscape){.brand-name{font-size:15px}.intro{transform:none}}
