@@ -7,7 +7,31 @@ const dialog=document.getElementById('notice');
 function showNotice(title,body){document.getElementById('notice-title').textContent=title;document.getElementById('notice-body').textContent=body;dialog.showModal();}
 document.querySelectorAll('[data-social]').forEach(button=>button.addEventListener('click',()=>showNotice(button.dataset.social,'Our '+button.dataset.social+' profile will be shared here when we launch.')));
 document.getElementById('close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
-document.getElementById('notify').addEventListener('submit',event=>{event.preventDefault();document.getElementById('feedback').textContent='Email notifications aren’t connected yet. Please check back for launch updates.';});
+// ---- Email capture -> Google Sheets ----
+// Paste your Google Apps Script Web App URL here (see google-sheets-setup/SETUP.md).
+const SHEET_ENDPOINT = 'PASTE_YOUR_WEB_APP_URL_HERE';
+document.getElementById('notify').addEventListener('submit',async event=>{
+  event.preventDefault();
+  const form=event.currentTarget;
+  const feedback=document.getElementById('feedback');
+  const button=form.querySelector('button[type="submit"]');
+  const email=document.getElementById('email').value.trim();
+  const honeypot=form.querySelector('[name="website"]');
+  feedback.classList.remove('ok','err');
+  if(honeypot&&honeypot.value){return;} // bots fill hidden field
+  if(!email||!form.checkValidity()){feedback.textContent='Please enter a valid email address.';feedback.classList.add('err');return;}
+  if(SHEET_ENDPOINT.startsWith('PASTE_')){feedback.textContent='Email collection is not connected yet.';feedback.classList.add('err');return;}
+  const label=button.textContent;button.disabled=true;button.textContent='SENDING...';
+  try{
+    // text/plain avoids a CORS preflight, which Apps Script does not support.
+    await fetch(SHEET_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({email,source:location.hostname,submittedAt:new Date().toISOString()})});
+    form.reset();
+    feedback.textContent='Thank you! You\u2019re on the list \u2014 we\u2019ll notify you as soon as MyTripRaja launches.';
+    feedback.classList.add('ok');
+  }catch(err){
+    feedback.textContent='Something went wrong. Please try again in a moment.';feedback.classList.add('err');
+  }finally{button.disabled=false;button.textContent=label;}
+});
 // One forward-only source draws both sides in the same callback, avoiding drift.
 const glowSource = document.getElementById('glow-source');
 const glowCanvases = [...document.querySelectorAll('canvas.glow-video')];
