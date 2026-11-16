@@ -9,7 +9,7 @@ document.querySelectorAll('[data-social]').forEach(button=>button.addEventListen
 document.getElementById('close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
 // ---- Email capture -> Google Sheets ----
 // Paste your Google Apps Script Web App URL here (see google-sheets-setup/SETUP.md).
-const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxp8hnJVSEF3ezKMRuo0v9R0Lq-d5GXrAzvlSzBqoEyAPsl2uAVT7Nj6Evsh-9NcPM1/exec';
+const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbznNf_kgxKgGLjJc6p3NGryo-RIs5c9ivOYa2NcvKvn8L8oH_b_M1BwgkI2UiJWgK4/exec';
 document.getElementById('notify').addEventListener('submit',async event=>{
   event.preventDefault();
   const form=event.currentTarget;
