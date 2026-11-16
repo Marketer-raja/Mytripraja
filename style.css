@@ -45,3 +45,11 @@ nav a.linkedin{font-size:27px;font-weight:bold}
 .intro{transform:translateY(-2.2dvh)}
 @media(max-width:650px){.brand-name{font-size:19px}.brand{gap:8px}.intro{transform:translateY(-1.5dvh)}}
 @media(max-height:500px) and (orientation:landscape){.brand-name{font-size:15px}.intro{transform:none}}
+
+/* Fix: intro text was clipped under the header */
+.intro,
+.intro{transform:none!important}
+.intro{padding-top:.6dvh}
+@media(max-width:650px){.intro{transform:none!important;padding-top:0}}
+/* Brand name colour matched to the neon logo (magenta -> violet -> blue) */
+.brand-name{color:#b45cff;background:linear-gradient(100deg,#f03cff 0%,#a64dff 45%,#3f7bff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 8px rgba(150,80,255,.45))}
