@@ -27,3 +27,13 @@ canvas.glow-video{background:url('assets/glow-poster.jpg') center/100% 100% no-r
 .glow-purple,.glow-blue{filter:none}
 canvas.glow-purple{background-color:#a018ff;background-blend-mode:multiply}
 canvas.glow-blue{background-color:#124eff;background-blend-mode:multiply}
+
+/* Logo + nav links */
+.brand-logo{display:block;height:clamp(40px,7.2dvh,64px);width:auto;aspect-ratio:1/1;object-fit:contain}
+nav a{display:flex;align-items:center;justify-content:center;color:#f4f4f4;text-decoration:none;width:24px;height:28px;font-family:Arial,Helvetica,sans-serif;line-height:1;transition:color .2s,transform .2s}
+nav a:hover{color:#9c55ff;transform:translateY(-2px)}
+nav a svg{width:24px;height:24px}
+nav a.facebook{font-size:28px;font-weight:bold}
+nav a.linkedin{font-size:27px;font-weight:bold}
+@media(max-width:650px){nav a{transform:scale(.85)}nav a:hover{transform:scale(.85) translateY(-2px)}.brand-logo{height:44px}}
+@media(max-height:500px) and (orientation:landscape){.brand-logo{height:40px}nav a{transform:scale(.7)}}
